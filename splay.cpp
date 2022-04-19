@@ -11,7 +11,7 @@ Node::~Node(){
 }
 
 
-Splay_Tree::Splay_Tree(){
+Splay_Tree::Splay_Tree(Node* node){
     root = nullptr;
 }
 
@@ -45,49 +45,55 @@ void Splay_Tree::postOrder(Node* node){   //postorder traversal
     
 }
 
-void Splay_Tree::print(Node* root, std::string indent, bool lastNode){
-    
-}
+	// rotate left at node x
+	void Splay_Tree::leftRotate(Node* x) {
+		Node* y = x->right;
+		x->right = y->left;
+		if (y->left != nullptr) {
+			y->left->parent = x;
+		}
+		y->parent = x->parent;
+		if (x->parent == nullptr) {
+			this->root = y;
+		} else if (x == x->parent->left) {
+			x->parent->left = y;
+		} else {
+			x->parent->right = y;
+		}
+		y->left = x;
+		x->parent = y;
+	}
 
-void Splay_Tree::leftRotate(Node* a){    //roate tree left
-    Node* b = a->left;
-    a->left = b->right;
-    if(b->right != nullptr){
-        b->right->parent = a;
-    }
-    b->parent = a->parent;
-    if(a->parent == nullptr){
-        this->root = b;
-    }
-    else if (a == a ->parent->left){
-        a->parent->left = b;
-    }
-    else {
-        a->parent->right = b;
-    }
-    b->left = a;
-    a->parent = b;
-}
+	// rotate right at node x
+	void Splay_Tree::rightRotate(Node* x) {
+		Node* y = x->left;
+		x->left = y->right;
+		if (y->right != nullptr) {
+			y->right->parent = x;
+		}
+		y->parent = x->parent;
+		if (x->parent == nullptr) {
+			this->root = y;
+		} else if (x == x->parent->right) {
+			x->parent->right = y;
+		} else {
+			x->parent->left = y;
+		}
+		y->right = x;
+		x->parent = y;
+	}
 
-void Splay_Tree::rightRotate(Node* a){
-    Node* b = a->left;
-    a->left = b-> right;
-    if(b->right != nullptr){
-        b ->right->parent = a;
-    }
-    b->parent = a->parent;
-    else if(a == a->parent->right){
-        a->parent->right = b;
-    }
-    else{
-        a->parent->left = b;
-    }
-    b->right = a;
-    a->parent = b;
-}
 
-void Splay_Tree::splay(Node* x){
-    
-}
+void Splay_Tree::preorder() {
+		preOrder(this->root);
+	}
 
- 
+
+void Splay_Tree::inorder() {
+		inOrder(this->root);
+	}
+
+void Splay_Tree::postorder() {
+		postOrder(this->root);
+	}
+
