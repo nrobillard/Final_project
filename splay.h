@@ -24,36 +24,28 @@ class Splay_Tree
     private:
         Node* root;
 
-        Node* searchTree(Node* node, int key);
-        void print(Node* root, std::string indent, bool lastNode);
-        void leftRotate(Node* x);
-        void rightRotate(Node* x);
-        void splay(Node* x);
-        void split(Node* &x, Node* &a, Node* &b);
+    
     public:
         //contructor
         Splay_Tree(Node* node);
         void preOrder(Node* node);
         void inOrder(Node* node);
         void postOrder(Node* node);
+
+        void printHelper(Node* root, std::string indent, bool last);
         void leftRotate(Node* x);
         void rightRotate(Node* x);
+
+        void splay(Node* x);
+        void split(Node* &x, Node* &a, Node* &b);
 
         void preorder();
         void inorder();
         void postorder();
 
-        /*
-        Node* serachTree(int k);
-        Node* minimum(Node* node);
-        Node* maximum(Node* node);
-        Node* successor(Node* x);
-        Node* predecessor(Node* x);
-        Node* insert(int key);
-        Node* getRoot();
-        void delete_node(int data);
-        void print();
-        */
+        void insert(int key);
+        void prettyPrint();
+
 };
 
 
