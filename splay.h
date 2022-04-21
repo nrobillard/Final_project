@@ -16,10 +16,10 @@ class Node
     public:
         Node();
         ~Node();
-    friend class Splay_Tree;
+    friend class Splay;
 };
 
-class Splay_Tree
+class Splay
 {
     private:
         Node* root;
@@ -27,7 +27,7 @@ class Splay_Tree
     
     public:
         //contructor
-        Splay_Tree(Node* node);
+     Splay();
         void preOrder(Node* node);
         void inOrder(Node* node);
         void postOrder(Node* node);
