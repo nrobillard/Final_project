@@ -6,20 +6,14 @@ Node::Node(){
     
 }
 
-Node::~Node(){
-    
-}
 
-
-Splay_Tree::Splay_Tree(Node* node){
+Splay::Splay(){
     root = nullptr;
 }
 
-Splay_Tree::~Splay_Tree(){
-    
-}
 
-void Splay_Tree::preOrder(Node* node){    //preorder traversal
+
+void Splay::preOrder(Node* node){    //preorder traversal
     if (node != nullptr){
         std::cout<<node->data<<" ";       //visit root node
         preOrder(node->left);             //visit left node
@@ -28,7 +22,7 @@ void Splay_Tree::preOrder(Node* node){    //preorder traversal
     
 }
 
-void Splay_Tree::inOrder(Node* node){     //inorder traversal
+void Splay::inOrder(Node* node){     //inorder traversal
     if (node != nullptr) {
         inOrder(node->left);              //visit left node
         std::cout << node->data << " ";   //visit root node
@@ -36,7 +30,7 @@ void Splay_Tree::inOrder(Node* node){     //inorder traversal
     }
 }
 
-void Splay_Tree::postOrder(Node* node){   //postorder traversal
+void Splay::postOrder(Node* node){   //postorder traversal
     if (node != nullptr){
         postOrder(node->left);            //visit left node
         postOrder(node->right);           //visit right node
@@ -45,7 +39,7 @@ void Splay_Tree::postOrder(Node* node){   //postorder traversal
     
 }
 
-void Splay_Tree::printHelper(Node* root, std::string indent, bool last) {
+void Splay::printHelper(Node* root, std::string indent, bool last) {
 		// print the tree structure on the screen
 	   	if (root != nullptr) {
 		   std::cout<<indent;
@@ -65,7 +59,7 @@ void Splay_Tree::printHelper(Node* root, std::string indent, bool last) {
 	}
 
 	// rotate left at node x
-void Splay_Tree::leftRotate(Node* x) {
+void Splay::leftRotate(Node* x) {
 	Node* y = x->right;
 	x->right = y->left;
 	if (y->left != nullptr) {
@@ -84,7 +78,7 @@ void Splay_Tree::leftRotate(Node* x) {
 }
 
 	// rotate right at node x
-void Splay_Tree::rightRotate(Node* x) {
+void Splay::rightRotate(Node* x) {
 	Node* y = x->left;
 	x->left = y->right;
 	if (y->right != nullptr) {
@@ -102,7 +96,7 @@ void Splay_Tree::rightRotate(Node* x) {
 	x->parent = y;
 }
 
-	void Splay_Tree::splay(Node* x) {
+	void Splay::splay(Node* x) {
 		while (x->parent) {
 			if (!x->parent->parent) {
 				if (x == x->parent->left) {
@@ -134,7 +128,7 @@ void Splay_Tree::rightRotate(Node* x) {
 
 
 	// splits the tree into s and t
-void Splay_Tree::split(Node* &x, Node* &s, Node* &t) {
+void Splay::split(Node* &x, Node* &s, Node* &t) {
 	splay(x);
 	if (x->right) {
 		t = x->right;
@@ -148,20 +142,20 @@ void Splay_Tree::split(Node* &x, Node* &s, Node* &t) {
 	} 
 
 
-void Splay_Tree::preorder() {
+void Splay::preorder() {
 		preOrder(this->root);
 	}
 
 
-void Splay_Tree::inorder() {
+void Splay::inorder() {
 		inOrder(this->root);
 	}
 
-void Splay_Tree::postorder() {
+void Splay::postorder() {
 		postOrder(this->root);
 	}
 
-void Splay_Tree::insert(int key) {
+void Splay::insert(int key) {
 		// normal BST insert
 		Node* node = new Node;
 		node->parent = nullptr;
@@ -196,12 +190,12 @@ void Splay_Tree::insert(int key) {
 
 
 	// print the tree structure on the screen
-	void Splay_Tree::prettyPrint() {
+	void Splay::prettyPrint() {
 		printHelper(this->root, "", true);
 	}
 
 int main(){
-	Splay_Tree bst;
+	Splay bst;
 	bst.insert(33);
 	bst.insert(44);
 	bst.insert(67);
