@@ -8,14 +8,13 @@
 class Node
 {
     private:
-        int data; // holds the key
+        std::string data; // holds the key
 	    Node *parent; // pointer to the parent
 	    Node *left; // pointer to left child
 	    Node *right; // pointer to right child
 
     public:
         Node();
-        ~Node();
     friend class Splay;
 };
 
@@ -27,7 +26,7 @@ class Splay
     
     public:
         //contructor
-     Splay();
+        Splay();
         void preOrder(Node* node);
         void inOrder(Node* node);
         void postOrder(Node* node);
@@ -43,7 +42,7 @@ class Splay
         void inorder();
         void postorder();
 
-        void insert(int key);
+        void insert(std::string key);
         void prettyPrint();
 
 };
