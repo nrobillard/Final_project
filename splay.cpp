@@ -155,7 +155,7 @@ void Splay::postorder() {
 		postOrder(this->root);
 	}
 
-void Splay::insert(int key) {
+void Splay::insert(std::string key) {
 		// normal BST insert
 		Node* node = new Node;
 		node->parent = nullptr;
@@ -195,15 +195,10 @@ void Splay::insert(int key) {
 	}
 
 int main(){
-	Splay bst;
-	bst.insert(33);
-	bst.insert(44);
-	bst.insert(67);
-	bst.insert(5);
-	bst.insert(89);
-	bst.insert(41);
-	bst.insert(98);
-	bst.insert(1);
-	bst.prettyPrint();
+	Splay obj;
+	obj.insert("Tree");
+	obj.insert("first");
+	
+	obj.prettyPrint();
 	return 0;
 }
