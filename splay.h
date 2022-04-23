@@ -32,8 +32,8 @@ class Splay
         void postOrder(Node* node);
 
         void printHelper(Node* root, std::string indent, bool last);
-        void leftRotate(Node* x);
-        void rightRotate(Node* x);
+        void leftRotate(Node* a);
+        void rightRotate(Node* a);
 
         void splay(Node* x);
         void split(Node* &x, Node* &a, Node* &b);
@@ -42,7 +42,7 @@ class Splay
         void inorder();
         void postorder();
 
-        void insert(std::string key);
+        void insert(std::string node_data);
         void prettyPrint();
 
 };
