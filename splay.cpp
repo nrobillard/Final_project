@@ -11,6 +11,8 @@ Splay::Splay(){
     root = nullptr;
 }
 
+
+
 void Splay::preOrder(Node* node){    //preorder traversal
     if (node != nullptr){
         std::cout<<node->data<<" ";       //visit root node
@@ -37,100 +39,88 @@ void Splay::postOrder(Node* node){   //postorder traversal
     
 }
 
-void Splay::printHelper(Node* root, std::string indent, bool last) {
-		// print the tree structure on the screen
-	   	if (root != nullptr) {
-		   std::cout<<indent;
-		   if (last) {
-		      std::cout<<"└────";
-		      indent += "     ";
-		   } else {
-		      std::cout<<"├────";
-		      indent += "|    ";
-		   }
-
-		   std::cout<<root->data<<std::endl;
-
-		   printHelper(root->left, indent, false);
-		   printHelper(root->right, indent, true);
+Node* Splay::searchTreeHelper(Node* node, std::string key) {
+		if (node == nullptr || key == node->data) {
+			return node;
 		}
+
+		if (key < node->data) {
+			return searchTreeHelper(node->left, key);
+		} 
+		return searchTreeHelper(node->right, key);
 	}
 
-//rotate tree left at given node a
-void Splay::leftRotate(Node* a) {
-	Node* b = a->right;
-	a->right = b->left;
-	if (b->left != nullptr) {
-		b->left->parent = a;
+
+	// rotate left at node x
+void Splay::leftRotate(Node* x) {
+	Node* y = x->right;
+	x->right = y->left;
+	if (y->left != nullptr) {
+		y->left->parent = x;
 	}
-	b->parent = a->parent;
-	if (a->parent == nullptr) {
-		this->root = b;
-	} else if (a == a->parent->left) {
-		a->parent->left = b;
+	y->parent = x->parent;
+	if (x->parent == nullptr) {
+		this->root = y;
+	} else if (x == x->parent->left) {
+		x->parent->left = y;
 	} else {
-		a->parent->right = b;
+		x->parent->right = y;
 	}
-	b->left = a;
-	a->parent = b;
+	y->left = x;
+	x->parent = y;
 }
 
-//rotate tree right at given node a
-void Splay::rightRotate(Node* a) {
-	Node* b = a->left;
-	a->left = b->right;
-	if (b->right != nullptr) {
-		b->right->parent = a;
+	// rotate right at node x
+void Splay::rightRotate(Node* x) {
+	Node* y = x->left;
+	x->left = y->right;
+	if (y->right != nullptr) {
+		y->right->parent = x;
 	}
-	b->parent = a->parent;
-	if (a->parent == nullptr) {
-		this->root = b;
-	} else if (a == a->parent->right) {
-		a->parent->right = b;
+	y->parent = x->parent;
+	if (x->parent == nullptr) {
+		this->root = y;
+	} else if (x == x->parent->right) {
+		x->parent->right = y;
 	} else {
-		a->parent->left = b;
+		x->parent->left = y;
 	}
-	b->right = a;
-	a->parent = b;
+	y->right = x;
+	x->parent = y;
 }
 
-//moves node to the root using rotations
-void Splay::splay(Node* x) {
-    //while the node still has a parent (not the root)
-	while (x->parent) {
-        //a single zig or zag rotations requires only one parent node above current node
-		if (!x->parent->parent) {
-			//zig rotation
-			if (x == x->parent->left) {
+	void Splay::splay(Node* x) {
+		while (x->parent) {
+			if (!x->parent->parent) {
+				if (x == x->parent->left) {
+					// zig rotation
+					rightRotate(x->parent);
+				} else {
+					// zag rotation
+					leftRotate(x->parent);
+				}
+			} else if (x == x->parent->left && x->parent == x->parent->parent->left) {
+				// zig-zig rotation
+				rightRotate(x->parent->parent);
 				rightRotate(x->parent);
-			
-            //zag rotation
+			} else if (x == x->parent->right && x->parent == x->parent->parent->right) {
+				// zag-zag rotation
+				leftRotate(x->parent->parent);
+				leftRotate(x->parent);
+			} else if (x == x->parent->right && x->parent == x->parent->parent->left) {
+				// zig-zag rotation
+				leftRotate(x->parent);
+				rightRotate(x->parent);
 			} else {
+				// zag-zig rotation
+				rightRotate(x->parent);
 				leftRotate(x->parent);
 			}
-       
-		//zig-zig rotation
-		} else if (x == x->parent->left && x->parent == x->parent->parent->left) {
-			rightRotate(x->parent->parent);
-			rightRotate(x->parent);
-		//zag-zag rotation
-		} else if (x == x->parent->right && x->parent == x->parent->parent->right) {
-			leftRotate(x->parent->parent);
-			leftRotate(x->parent);
-		//zig-zag rotation
-		} else if (x == x->parent->right && x->parent == x->parent->parent->left) {
-			leftRotate(x->parent);
-			rightRotate(x->parent);
-		//zag-zig rotation
-		} else {
-			rightRotate(x->parent);
-			leftRotate(x->parent);
 		}
 	}
-}
 
 
-// splits the tree into s and t
+	// splits the tree into s and t
 void Splay::split(Node* &x, Node* &s, Node* &t) {
 	splay(x);
 	if (x->right) {
@@ -158,16 +148,14 @@ void Splay::postorder() {
 		postOrder(this->root);
 	}
 
-void Splay::insert(std::string node_data) {
-		//insert new node, the process is the same as a normal BST insert
+void Splay::insert(std::string key) {
+		// normal BST insert
+		int count = 0;
 		Node* node = new Node;
-        //set location to nullptr
-		node->right = nullptr;
-		node->left = nullptr;
 		node->parent = nullptr;
-        //set data to given data
-		node->data = node_data;
-
+		node->left = nullptr;
+		node->right = nullptr;
+		node->data = key;
 		Node* y = nullptr;
 		Node* x = this->root;
 
@@ -180,6 +168,7 @@ void Splay::insert(std::string node_data) {
 			}
 		}
 
+		// y is parent of x
 		node->parent = y;
 		if (y == nullptr) {
 			root = node;
@@ -189,9 +178,43 @@ void Splay::insert(std::string node_data) {
 			y->right = node;
 		}
 
-		//Now splay the node
+		// splay the node
 		splay(node);
+
+		//count increments
+		count++;
 	}
+
+	void Splay::printHelper(Node* root, std::string indent, bool last) {
+		// print the tree structure on the screen
+	  if (root != nullptr) {
+		   std::cout<<indent;
+		   if (last) {
+		      std::cout<<"└────";
+		      indent += "     ";
+		   } else {
+		      std::cout<<"├────";
+		      indent += "|    ";
+		   }
+
+		   std::cout<<root->data<<std::endl;
+		
+
+		   printHelper(root->left, indent, false);
+		   printHelper(root->right, indent, true);
+		}
+		
+	}
+
+
+	Node* Splay::searchTree(std::string k) {
+		Node* x = searchTreeHelper(this->root, k);
+		if (x) {
+			splay(x);
+		}
+		return x;
+	}
+
 
 
 	// print the tree structure on the screen
@@ -202,8 +225,10 @@ void Splay::insert(std::string node_data) {
 int main(){
 	Splay obj;
 	obj.insert("Tree");
-	obj.insert("first");
-	
+	obj.insert("firs");
+	obj.insert("nut");
+	obj.insert("glue");
+	obj.searchTree("nut");
 	obj.prettyPrint();
 	return 0;
 }
