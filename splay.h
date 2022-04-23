@@ -23,17 +23,18 @@ class Splay
     private:
         Node* root;
 
-    
+
     public:
         //contructor
         Splay();
         void preOrder(Node* node);
         void inOrder(Node* node);
         void postOrder(Node* node);
+        Node* searchTreeHelper(Node* node, std::string key);
 
         void printHelper(Node* root, std::string indent, bool last);
-        void leftRotate(Node* a);
-        void rightRotate(Node* a);
+        void leftRotate(Node* x);
+        void rightRotate(Node* x);
 
         void splay(Node* x);
         void split(Node* &x, Node* &a, Node* &b);
@@ -42,8 +43,10 @@ class Splay
         void inorder();
         void postorder();
 
-        void insert(std::string node_data);
+        void insert(std::string key);
         void prettyPrint();
+
+        Node* searchTree(std::string k);
 
 };
 
