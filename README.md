@@ -14,4 +14,5 @@ g++ splay.cpp -o output
 ./output text.txt
 
 3.)Next you will be prompted with 5 options in the terminal 
+
 <img width="250" alt="Screen Shot 2022-04-24 at 5 51 54 PM" src="https://user-images.githubusercontent.com/71105877/164998155-ae41fa0b-82fd-441f-b350-c3254a5e4fe3.png">
