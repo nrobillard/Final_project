@@ -2,6 +2,10 @@
 #include "splay.h"
 #include <string>
 
+#include <fstream>
+#include <sstream>
+
+
 Node::Node(){
     
 }
