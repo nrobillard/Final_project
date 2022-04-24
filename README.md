@@ -5,3 +5,13 @@ A splay tree is a binary search tree with the additional property that recently 
 
 whenever an element is looked up in the tree, the splay tree reorganizes to move that element to the root of the tree. If the next lookup request is for the same element, it can be returned immediately. In general, if a small number of elements are being heavily used, they will tend to be found near the top of the tree and are thus found quickly.
 
+# Instructions
+
+1.)In order to run our functions you need to first compile the code using 
+g++ splay.cpp -o output
+
+2.)Next run the code and make sure it takes in a file as the first arguement
+./output text.txt
+
+3.)Next you will be prompted with 5 options in the terminal 
+<img width="251" alt="Screen Shot 2022-04-24 at 5 50 13 PM" src="https://user-images.githubusercontent.com/71105877/164998099-392ba165-30d6-4436-81a0-88b36d525c2a.png">
