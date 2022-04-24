@@ -7,7 +7,7 @@ whenever an element is looked up in the tree, the splay tree reorganizes to move
 
 # Instructions
 
-1.)In order to run our functions you need to first compile the code using 
+1.)In order to run our code you need to first compile the code using 
 g++ splay.cpp -o output
 
 2.)Next run the code and make sure it takes in a file as the first arguement
@@ -16,3 +16,5 @@ g++ splay.cpp -o output
 3.)Next you will be prompted with 5 options in the terminal 
 
 <img width="250" alt="Screen Shot 2022-04-24 at 5 51 54 PM" src="https://user-images.githubusercontent.com/71105877/164998155-ae41fa0b-82fd-441f-b350-c3254a5e4fe3.png">
+
+4.) Next choose one of the numbers and in order to exit type 5
