@@ -219,7 +219,8 @@ void Splay::insert(std::string key) {
 	// print the tree structure on the screen
 	void Splay::prettyPrint() {
 		printHelper(this->root, "", true);
-		std::cout << this->count << std::endl;
+		std::cout << std::endl;
+		std::cout << "Count: " << this->count << std::endl;
 	}
 
 void printTerminal(){
