@@ -150,7 +150,6 @@ void Splay::postorder() {
 
 void Splay::insert(std::string key) {
 		// normal BST insert
-		int count = 0;
 		Node* node = new Node;
 		node->parent = nullptr;
 		node->left = nullptr;
@@ -182,7 +181,7 @@ void Splay::insert(std::string key) {
 		splay(node);
 
 		//count increments
-		count++;
+		this->count++;
 	}
 
 	void Splay::printHelper(Node* root, std::string indent, bool last) {
@@ -220,8 +219,76 @@ void Splay::insert(std::string key) {
 	// print the tree structure on the screen
 	void Splay::prettyPrint() {
 		printHelper(this->root, "", true);
+		std::cout << this->count << std::endl;
 	}
 
+void printTerminal(){
+
+	std::cout << std::endl;
+	std::cout << "Splay Tree Project" << std::endl;
+	std::cout << "Choose an Option" << std::endl;
+	std::cout << "------------------------------------" << std::endl;
+	std::cout << "1\tInsert a new Element" << std::endl;
+	std::cout << "2\tRemove an Element" << std::endl;                          //Need to make a remove
+	std::cout << "3\tSearch for an Element" << std::endl;
+	std::cout << "4\tPrint out the Tree" << std::endl;
+	std::cout << "5\tExit the Program" << std::endl;
+	std::cout << "------------------------------------" << std::endl;
+	std::cout << std::endl;
+
+}
+
+int main(int argc, char*argv[]){
+	Splay obj;
+
+    std::string input_filename = argv[1];
+    std::string line, input, input2;
+    std::ifstream table;                //Create instance
+    table.open(input_filename);                    //Open the file
+    if(table.fail()){
+        std::cout << "Can't open tabledata\n";
+        return 1;
+    }
+    while(std::getline(table, line, ' ')){           //get a line of data from table, store in string
+		obj.insert(line);
+    }
+    table.close();
+
+    while (input.compare("5") != 0){
+    	printTerminal();
+    	std::cin >> input;
+
+    	if (input.compare("1") == 0){
+    		std::cout << "Insert an Element: ";
+    		std::cin >> input2;
+    		obj.insert(input2);
+    	}
+
+    	else if (input.compare("2") == 0){
+    		std::cout << "Remove an Element: ";
+    		std::cin >> input2;                          //Need to make a remove
+    		obj.insert(input2);
+    	}
+
+    	else if (input.compare("3") == 0){
+    		std::cout << "Search for an Element: ";
+    		std::cin >> input2;
+    		obj.searchTree(input2);
+    	}
+
+    	else if (input.compare("4") == 0){
+    		obj.prettyPrint();
+    	}
+
+    	else if (input.compare("5") == 0){
+    		std::cout << "Goodbye!" << std::endl;
+    	}
+
+    }
+}
+
+
+/*
 int main(){
 	Splay obj;
 	obj.insert("Tree");
@@ -232,3 +299,4 @@ int main(){
 	obj.prettyPrint();
 	return 0;
 }
+*/
