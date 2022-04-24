@@ -22,7 +22,7 @@ class Splay
 {
     private:
         Node* root;
-
+	int count = 0;
 
     public:
         //contructor
