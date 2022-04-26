@@ -1,13 +1,12 @@
 #include <iostream>
 #include "splay.h"
 #include <string>
-
 #include <fstream>
 #include <sstream>
 
 
 Node::Node(){
-    
+
 }
 
 
@@ -23,7 +22,7 @@ void Splay::preOrder(Node* node){    //preorder traversal
         preOrder(node->left);             //visit left node
         preOrder(node->right);            //visit right node
     }
-    
+
 }
 
 void Splay::inOrder(Node* node){     //inorder traversal
@@ -40,7 +39,7 @@ void Splay::postOrder(Node* node){   //postorder traversal
         postOrder(node->right);           //visit right node
         std::cout << node->data << " ";   //visit root node
     }
-    
+
 }
 
 Node* Splay::searchTreeHelper(Node* node, std::string key) {
@@ -50,7 +49,7 @@ Node* Splay::searchTreeHelper(Node* node, std::string key) {
 
 		if (key < node->data) {
 			return searchTreeHelper(node->left, key);
-		} 
+		}
 		return searchTreeHelper(node->right, key);
 	}
 
@@ -136,7 +135,7 @@ void Splay::split(Node* &x, Node* &s, Node* &t) {
 	s = x;
 	s->right = nullptr;
 	x = nullptr;
-	} 
+	}
 
 
 void Splay::preorder() {
@@ -188,25 +187,29 @@ void Splay::insert(std::string key) {
 		this->count++;
 	}
 
-	void Splay::printHelper(Node* root, std::string indent, bool last) {
-		// print the tree structure on the screen
-	  if (root != nullptr) {
-		   std::cout<<indent;
-		   if (last) {
-		      std::cout<<"└────";
-		      indent += "     ";
-		   } else {
-		      std::cout<<"├────";
-		      indent += "|    ";
+	void Splay::printHelper(Node* root, std::string arrow, bool set, std::string output, std::ofstream &out) {
+		// print the tree structure to a text file
+
+	  if (root->left != nullptr || root->right != nullptr) {
+
+		   if (root->left != nullptr && set != true) {
+		      out << "\t" << root->data << arrow << root->left->data << "\n";
+          if (root->left->left != nullptr || root->left != nullptr){
+            printHelper(root->left, arrow, false, output, out);}
+          else {
+            printHelper(root->parent, arrow, true, output, out);}
 		   }
+       if (root->right != nullptr && set != true) {
+		      out << "\t" << root->data << arrow << root->right->data << "\n";
+           if (root->right->right != nullptr || root->right != nullptr){
+            printHelper(root->right, arrow, false, output, out);}
+          else {
+            printHelper(root->parent, arrow, true, output, out);}
 
-		   std::cout<<root->data<<std::endl;
-		
-
-		   printHelper(root->left, indent, false);
-		   printHelper(root->right, indent, true);
+		   }
 		}
-		
+
+
 	}
 
 
@@ -221,8 +224,8 @@ void Splay::insert(std::string key) {
 
 
 	// print the tree structure on the screen
-	void Splay::prettyPrint() {
-		printHelper(this->root, "", true);
+	void Splay::prettyPrint(std::string output, std::ofstream &out) {
+		printHelper(this->root, " -> ", false, output, out);
 		std::cout << std::endl;
 		std::cout << "Count: " << this->count << std::endl;
 	}
@@ -247,8 +250,10 @@ int main(int argc, char*argv[]){
 	Splay obj;
 
     std::string input_filename = argv[1];
+    std::string output_filename = argv[2];
     std::string line, input, input2;
     std::ifstream table;                //Create instance
+    std::ofstream out;
     table.open(input_filename);                    //Open the file
     if(table.fail()){
         std::cout << "Can't open tabledata\n";
@@ -262,6 +267,7 @@ int main(int argc, char*argv[]){
     while (input.compare("5") != 0){
     	printTerminal();
     	std::cin >> input;
+    	std::cout << std::endl;
 
     	if (input.compare("1") == 0){
     		std::cout << "Insert an Element: ";
@@ -282,7 +288,12 @@ int main(int argc, char*argv[]){
     	}
 
     	else if (input.compare("4") == 0){
-    		obj.prettyPrint();
+    	out.open (output_filename);
+        out << "digraph G {\n";
+        obj.prettyPrint(output_filename, out);
+        out << "}";
+        out.close();
+
     	}
 
     	else if (input.compare("5") == 0){
@@ -291,17 +302,3 @@ int main(int argc, char*argv[]){
 
     }
 }
-
-
-/*
-int main(){
-	Splay obj;
-	obj.insert("Tree");
-	obj.insert("firs");
-	obj.insert("nut");
-	obj.insert("glue");
-	obj.searchTree("nut");
-	obj.prettyPrint();
-	return 0;
-}
-*/
