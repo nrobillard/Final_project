@@ -10,8 +10,8 @@ whenever an element is looked up in the tree, the splay tree reorganizes to move
 1.)In order to run our code you need to first compile the code using 
 g++ splay.cpp -o output
 
-2.)Next run the code and make sure it takes in a file as the first arguement
-./output text.txt
+2.)Next run the code and make sure it takes in a file as the first arguement and the output file name as the second arguement
+./output text.txt output.txt
 
 3.)Next you will be prompted with 5 options in the terminal 
 
