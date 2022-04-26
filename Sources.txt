@@ -2,3 +2,5 @@ Sources Used:
 
 
 https://algorithmtutor.com/Data-Structures/Tree/Splay-Trees/
+https://www.cs.cornell.edu/courses/cs312/2004sp/lectures/lec24.html
+https://learning.oreilly.com/library/view/handbook-of-data/9781351645645/xhtml/27_Chapter13.xhtml#sec_13_2
