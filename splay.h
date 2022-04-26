@@ -32,7 +32,7 @@ class Splay
         void postOrder(Node* node);
         Node* searchTreeHelper(Node* node, std::string key);
 
-        void printHelper(Node* root, std::string indent, bool last);
+        void printHelper(Node* root, std::string indent, bool set, std::string output, std::ofstream &out);
         void leftRotate(Node* x);
         void rightRotate(Node* x);
 
@@ -44,7 +44,7 @@ class Splay
         void postorder();
 
         void insert(std::string key);
-        void prettyPrint();
+        void prettyPrint(std::string output, std::ofstream &out);
 
         Node* searchTree(std::string k);
 
