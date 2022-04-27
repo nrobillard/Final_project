@@ -22,4 +22,4 @@ g++ splay.cpp -o output
 
 5.) When you print 4 it will print out a graph looking like this 
 
-<img width="716" alt="Screen Shot 2022-04-26 at 10 07 10 PM" src="https://user-images.githubusercontent.com/71105877/165423981-8ffe4c89-c239-4c44-83e3-0115bc44869d.png">
+<img width="400" alt="Screen Shot 2022-04-26 at 10 07 10 PM" src="https://user-images.githubusercontent.com/71105877/165423981-8ffe4c89-c239-4c44-83e3-0115bc44869d.png">
