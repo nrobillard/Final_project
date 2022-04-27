@@ -237,10 +237,9 @@ void printTerminal(){
 	std::cout << "Choose an Option" << std::endl;
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "1\tInsert a new Element" << std::endl;
-	std::cout << "2\tRemove an Element" << std::endl;                          //Need to make a remove
-	std::cout << "3\tSearch for an Element" << std::endl;
-	std::cout << "4\tPrint out the Tree" << std::endl;
-	std::cout << "5\tExit the Program" << std::endl;
+	std::cout << "2\tSearch for an Element" << std::endl;
+	std::cout << "3\tPrint out the Tree" << std::endl;
+	std::cout << "4\tExit the Program" << std::endl;
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << std::endl;
 
@@ -264,7 +263,7 @@ int main(int argc, char*argv[]){
     }
     table.close();
 
-    while (input.compare("5") != 0){
+    while (input.compare("4") != 0){
     	printTerminal();
     	std::cin >> input;
     	std::cout << std::endl;
@@ -276,18 +275,12 @@ int main(int argc, char*argv[]){
     	}
 
     	else if (input.compare("2") == 0){
-    		std::cout << "Remove an Element: ";
-    		std::cin >> input2;                          //Need to make a remove
-    		obj.insert(input2);
-    	}
-
-    	else if (input.compare("3") == 0){
     		std::cout << "Search for an Element: ";
     		std::cin >> input2;
     		obj.searchTree(input2);
     	}
 
-    	else if (input.compare("4") == 0){
+    	else if (input.compare("3") == 0){
     	out.open (output_filename);
         out << "digraph G {\n";
         obj.prettyPrint(output_filename, out);
@@ -296,9 +289,14 @@ int main(int argc, char*argv[]){
 
     	}
 
-    	else if (input.compare("5") == 0){
+    	else if (input.compare("4") == 0){
     		std::cout << "Goodbye!" << std::endl;
     	}
+
+	else{
+		std::cout << "Not a valid input, use numbers 1-4." << std::endl;
+		std::cout << std::endl;
+	}
 
     }
 }
