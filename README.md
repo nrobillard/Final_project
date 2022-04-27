@@ -18,3 +18,8 @@ g++ splay.cpp -o output
 <img width="250" alt="Screen Shot 2022-04-24 at 5 51 54 PM" src="https://user-images.githubusercontent.com/71105877/164998155-ae41fa0b-82fd-441f-b350-c3254a5e4fe3.png">
 
 4.) Next choose one of the numbers and in order to exit type 5
+
+
+5.) When you print 4 it will print out a graph looking like this 
+
+<img width="716" alt="Screen Shot 2022-04-26 at 10 07 10 PM" src="https://user-images.githubusercontent.com/71105877/165423981-8ffe4c89-c239-4c44-83e3-0115bc44869d.png">
